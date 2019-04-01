@@ -133,11 +133,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onItemClick(ParseObject item) {
 
-        startActivity(new Intent(this, PostDetail.class)
-                .putExtra("title",item.getString("title"))
-                .putExtra("image",item.getParseFile("image").getUrl())
-                .putExtra("desc",item.getString("description")));
+        Intent intent = new Intent(this, PostDetail.class);
 
+        intent.putExtra("title", item.getString("title"));
+        if (item.getParseFile("image") != null)
+            intent.putExtra("image", item.getParseFile("image").getUrl());
+        intent.putExtra("desc", item.getString("description"));
+
+        startActivity(intent);
     }
 
     @Override
